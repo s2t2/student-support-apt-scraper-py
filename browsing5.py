@@ -39,43 +39,30 @@ finally:
         #print("-----------")
         #breakpoint()
 
-        h4 = layout.find("h4").text #> '1 bedroom, 1 bath (400 sq ft) '
-        print("LAYOUT: ", h4.upper())
-
-        #h5 = layout.find("h5").text #> 'Finish Package I'
-        #print(h5.upper())
+        h4 = layout.find("h4")
+        if h4:
+            print("\n\n----------------")
+            print("LAYOUT: ", h4.text.upper()) #> '1 bedroom, 1 bath (400 sq ft) '
+        else:
+            continue # skip divs which don't contain layout information
 
         package_names = [h5.text for h5 in layout.findAll("h5")]
         print("PACKAGES:", package_names)
 
-        #table = layout.find("table", "table")
-        #header_row = table.find("thead").findAll("th")
-        #print(header_row) #> [<th> </th>, <th>Apartment</th>, <th>Available</th>, <th>Starting At</th>, <th></th>]
-        #print(header_row[3].text) #> 'Starting At'
-#
-        #rows = table.find("tbody").findAll("tr")
-        #for row in rows:
-        #    #print(row)
-        #    values = row.findAll("td")
-        #    print(values)
-        #    print("---")
+        tables = layout.findAll("table", "table")
+        for table in tables:
+            print("\n----")
+            print("PACKAGE AVAILABILITIES:")
+            header_row = table.find("thead").findAll("th")
+            #print(header_row) #> [<th> </th>, <th>Apartment</th>, <th>Available</th>, <th>Starting At</th>, <th></th>]
+            #print(header_row[3].text) #> 'Starting At'
 
-        #tables = layout.findAll("table", "table")
-        #for table in tables:
-#
-        #    header_row = table.find("thead").findAll("th")
-        #    #print(header_row) #> [<th> </th>, <th>Apartment</th>, <th>Available</th>, <th>Starting At</th>, <th></th>]
-        #    #print(header_row[3].text) #> 'Starting At'
-#
-        #    rows = table.find("tbody").findAll("tr")
-        #    for row in rows:
-        #        #print(row)
-        #        values = row.findAll("td")
-        #        print(values)
-        #        print("---")
-#
-        #    print("------")
-#
-        #print("----------------")
+            rows = table.find("tbody").findAll("tr")
+            for row in rows:
+                #print(row)
+                values = row.findAll("td")
+                print("\n", values)
+
+
 
     driver.quit()
