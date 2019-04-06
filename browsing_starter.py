@@ -32,34 +32,10 @@ finally:
 
     one_br_layouts = soup.find("div", id="bedrooms-1").findAll("div", "row")
     for layout in one_br_layouts:
-
-        #print(layout)
-        #print("-----------")
+        print(layout)
+        print("-----------")
         #breakpoint()
 
-        h4 = layout.find("h4")
-        if h4:
-            print("\n\n----------------")
-            print("LAYOUT: ", h4.text.upper()) #> '1 bedroom, 1 bath (400 sq ft) '
-        else:
-            continue # skip divs which don't contain layout information
-
-        package_names = [h5.text for h5 in layout.findAll("h5")]
-        print("PACKAGES:", package_names)
-
-        tables = layout.findAll("table", "table")
-        for table in tables:
-            print("\n----")
-            print("PACKAGE AVAILABILITIES:")
-            header_row = table.find("thead").findAll("th")
-            #print(header_row) #> [<th> </th>, <th>Apartment</th>, <th>Available</th>, <th>Starting At</th>, <th></th>]
-            #print(header_row[3].text) #> 'Starting At'
-
-            rows = table.find("tbody").findAll("tr")
-            for row in rows:
-                #print(row)
-                values = row.findAll("td")
-                print("\n", values)
 
 
 
