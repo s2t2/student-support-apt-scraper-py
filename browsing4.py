@@ -1,5 +1,7 @@
 # adapted from https://codereview.stackexchange.com/questions/177977/scraper-to-deal-with-some-complicated-site-with-ads
 
+from bs4 import BeautifulSoup
+
 from selenium import webdriver
 #from selenium.webdriver.common.by import By
 #from selenium.webdriver.support.ui import WebDriverWait
@@ -22,8 +24,16 @@ driver.get(URL)
 #    wait.until(EC.element_to_be_clickable((By.XPATH, "//span[.='SKIP']"))).click()
 #except TimeoutException: pass
 
-driver.find_elements_by_css_selector("#bedrooms-1")
+#driver.find_elements_by_css_selector("#bedrooms-1")
+
+soup = BeautifulSoup(driver.page_source, "html.parser")
+
+div = soup.find("div", id="floor-plan-type")
+
+print(div)
 
 breakpoint()
+
+
 
 driver.quit()
